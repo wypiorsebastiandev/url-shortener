@@ -35,9 +35,11 @@ az deployment group create --resource-group swpr-urlshortener-dev --template-fil
 ```bash
 az ad sp create-for-rbac --name "GitHub-Actions-SP" \
                          --role contributor \
-                         --scopes /subscriptions/89518450-6f9c-4039-8834-c5bab3ad3e92 \
+                         --scopes /subscriptions/f9b779f2-ca5b-4326-be30-d1c483b8bd36 \
                          --sdk-auth
 ```
+
+
 
 #### Configure a federated identity credential on an app
 
