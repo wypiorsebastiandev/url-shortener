@@ -42,7 +42,7 @@ jobs:
     - name: Deploy  
       uses: azure/arm-deploy@v2
       with:
-        scope: resourceGroup
+        scope: resourcegroup
         resourceGroupName: ${{ vars.RESOURCE_GROUP_NAME }}
         template: ./infrastructure/main.bicep
 
@@ -70,7 +70,7 @@ jobs:
       - name: Deploy  
         uses: azure/arm-deploy@v2
         with:
-          scope: resourceGroup
+          scope: resourcegroup
           resourceGroupName: ${{ vars.RESOURCE_GROUP_NAME }}
           template: ./infrastructure/main.bicep
 
@@ -99,6 +99,6 @@ jobs:
       - name: Deploy  
         uses: azure/arm-deploy@v2
         with:
-          scope: resourceGroup
+          scope: resourcegroup
           resourceGroupName: ${{ vars.RESOURCE_GROUP_NAME }}
           template: ./infrastructure/main.bicep
