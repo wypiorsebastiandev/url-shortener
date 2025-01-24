@@ -48,5 +48,6 @@ https://learn.microsoft.com/en-gb/entra/workload-id/workload-identity-federation
 ## Get Azure Publish Profile
 
 ```bash
-az webapp deployment list-publishing-profiles --name api-piza2nvlxc5jg --resource-group dometrain-urlshortener-dev --xml
+az webapp deployment list-publishing-profiles --name api-kbmgkbf5qxq5m --resource-group swpr-urlshortener-dev --xml
+az webapp deployment list-publishing-profiles --name api-sy6tz5n2hfkwq --resource-group swpr-urlshortener-stg --xml
 ```
