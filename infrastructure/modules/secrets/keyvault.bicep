@@ -1,20 +1,18 @@
-param keyVaultName string
-param principalIds array
-param principalType string = 'ServicePrincipal'
-param roleDefinitionId string = '4633458b-17de-408a-b874-0445c86b69e6'
+param location string = resourceGroup().location
+param vaultName string
 
-resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' existing = {
-  name: keyVaultName
+resource keyVault 'Microsoft.KeyVault/vaults@2023-07-01' = {
+  name: vaultName
+  location: location
+  properties: {
+    sku: {
+      name: 'standard'
+      family: 'A'
+    }
+    enableRbacAuthorization: true
+    tenantId: subscription().tenantId
+  }
 }
 
-resource keyVaultRoleAssignment 'Microsoft.Authorization/roleAssignments@2022-04-01' = [
-  for principalId in principalIds: {
-    name: guid(keyVault.id, principalId, roleDefinitionId)
-    scope: keyVault
-    properties: {
-      roleDefinitionId: subscriptionResourceId('Microsoft.Authorization/roleDefinitions', roleDefinitionId)
-      principalId: principalId
-      principalType: principalType
-    }
-  }
-]
+output id string = keyVault.id
+output name string = keyVault.name
