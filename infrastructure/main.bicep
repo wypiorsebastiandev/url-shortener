@@ -31,8 +31,4 @@ module keyVaultRoleAssignment 'modules/secrets/key-vault-role-assignment.bicep' 
       // Add more principal IDs as needed
     ]
   }
-  dependsOn: [
-    keyVault
-    apiService
-  ]
 }
