@@ -36,8 +36,11 @@ app.UseHttpsRedirection();
 app.MapPost("/api/urls",
     async (AddUrlHandler handler,
         AddUrlRequest request,
-        CancellationToken cancellationToken) =>
+        ILogger<Program> logger,
+CancellationToken cancellationToken) =>
     {
+        logger.LogInformation("Adding url {Url}", request.LongUrl);
+        
         var requestWithUser = request with
         {
             CreatedBy = "gui@guiferreira.me"

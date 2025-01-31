@@ -1,4 +1,4 @@
-@Api_HostAddress = https://api-g47bfaivuzobo.azurewebsites.net
+@Api_HostAddress = https://api-kbmgkbf5qxq5m.azurewebsites.net
 
 POST {{Api_HostAddress}}/api/urls
 Accept: application/json
