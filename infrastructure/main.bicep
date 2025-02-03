@@ -38,10 +38,7 @@ module tokenRangeService 'modules/compute/appservice.bicep' = {
     appServicePlanName: 'plan-token-range-${uniqueId}'
     location: location
     keyVaultName: keyVault.outputs.name
-  }
-  dependsOn: [
-    keyVault
-  ]
+  }  
 }
 
 module postgres 'modules/storage/postgresql.bicep' = {
