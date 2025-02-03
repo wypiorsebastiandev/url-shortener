@@ -1,5 +1,6 @@
 param location string = resourceGroup().location
 var uniqueId = uniqueString(resourceGroup().id)
+@secure()
 param pgSqlPassword string
 
 module keyVault 'modules/secrets/keyvault.bicep' = {
