@@ -1,3 +1,4 @@
+using System.Reflection;
 using Azure.Identity;
 using UrlShortener.Api.Extensions;
 using UrlShortener.Core.Urls.Add;
@@ -32,6 +33,8 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+app.MapGet("/", () => $"{nameof(Assembly)}");
 
 app.MapPost("/api/urls",
     async (AddUrlHandler handler,

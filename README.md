@@ -49,5 +49,13 @@ https://learn.microsoft.com/en-gb/entra/workload-id/workload-identity-federation
 
 ```bash
 az webapp deployment list-publishing-profiles --name api-kbmgkbf5qxq5m --resource-group swpr-urlshortener-dev --xml
+az webapp deployment list-publishing-profiles --name token-range-service-kbmgkbf5qxq5m --resource-group swpr-urlshortener-dev --xml
+
+
 az webapp deployment list-publishing-profiles --name api-sy6tz5n2hfkwq --resource-group swpr-urlshortener-stg --xml
+az webapp deployment list-publishing-profiles --name token-range-service-sy6tz5n2hfkwq --resource-group swpr-urlshortener-stg --xml
+```
+
+```bash
+az ad sp create-for-rbac --name "GitHub-Actions-SP" --role 'infra_deploy' --scopes /subscriptions/f9b779f2-ca5b-4326-be30-d1c483b8bd36 --sdk-auth
 ```
