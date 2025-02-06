@@ -34,7 +34,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", () => $"{nameof(Assembly)}");
+app.MapGet("/", () => $"{nameof(Assembly)} - TEST");
 
 app.MapPost("/api/urls",
     async (AddUrlHandler handler,
