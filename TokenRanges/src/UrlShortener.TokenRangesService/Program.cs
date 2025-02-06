@@ -20,9 +20,10 @@ app.UseHttpsRedirection();
 
 app.MapGet("/", () => "TokenRanges Service");
 app.MapPost("/assign", 
-    async (AssignTokenRangeRequest request, TokenRangeManager manager) =>
+    async (AssignTokenRangeRequest request, TokenRangeManager manager, ILogger<Program> logger) =>
     {
         var range = await manager.AssignRangeAsync(request.Key);
+        logger.LogInformation(request.Key);
 
         return range;
     });
