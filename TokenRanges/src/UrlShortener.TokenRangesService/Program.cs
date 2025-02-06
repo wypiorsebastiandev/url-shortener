@@ -1,32 +1,30 @@
-using System.Reflection;
+using Azure.Identity;
+using UrlShortener.TokenRangeService;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-// builder.Services.AddOpenApi();
+var keyVaultName = builder.Configuration["KeyVaultName"];
+if (!string.IsNullOrEmpty(keyVaultName))
+{
+    builder.Configuration.AddAzureKeyVault(
+        new Uri($"https://{keyVaultName}.vault.azure.net/"),
+        new DefaultAzureCredential());
+}
+
+builder.Services.AddSingleton(
+    new TokenRangeManager(builder.Configuration["Postgres:ConnectionString"]!));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    // app.MapOpenApi();
-}
-
 app.UseHttpsRedirection();
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+app.MapGet("/", () => "TokenRanges Service");
+app.MapPost("/assign", 
+    async (AssignTokenRangeRequest request, TokenRangeManager manager) =>
+    {
+        var range = await manager.AssignRangeAsync(request.Key);
 
-app.MapGet("/", () => $"{nameof(Assembly)}")
-.WithName("GetWeatherForecast");
+        return range;
+    });
 
 app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
