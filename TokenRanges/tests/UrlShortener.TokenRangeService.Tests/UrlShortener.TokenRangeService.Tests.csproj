@@ -24,14 +24,14 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Remove="Table.sql" />
-        <Content Include="Table.sql">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </Content>
+      <ProjectReference Include="..\..\src\UrlShortener.TokenRangeService\UrlShortener.TokenRangeService.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\UrlShortener.TokenRangesService\UrlShortener.TokenRangesService.csproj" />
+      <None Remove="Table.sql" />
+      <Content Include="Table.sql">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

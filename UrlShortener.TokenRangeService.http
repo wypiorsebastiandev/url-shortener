@@ -1,9 +1,0 @@
-POST https://token-range-service-kbmgkbf5qxq5m.azurewebsites.net/assign
-Accept: application/json
-Content-Type: application/json
-
-{
-  "key": "A1234"
-}
-
-###

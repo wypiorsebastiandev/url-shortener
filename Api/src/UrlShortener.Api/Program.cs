@@ -1,5 +1,5 @@
-using System.Reflection;
 using Azure.Identity;
+using UrlShortener.Api;
 using UrlShortener.Api.Extensions;
 using UrlShortener.Core.Urls.Add;
 using UrlShortener.Infrastructure.Extensions;
@@ -18,10 +18,21 @@ if (!string.IsNullOrEmpty(keyVaultName))
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton(TimeProvider.System);
+builder.Services.AddSingleton(TimeProvider.System)
+    .AddSingleton<IEnvironmentManager, EnvironmentManager>();
 builder.Services
     .AddUrlFeature()
     .AddCosmosUrlDataStore(builder.Configuration);
+
+builder.Services.AddHttpClient("TokenRangeService",
+    client =>
+    {
+        client.BaseAddress = 
+            new Uri(builder.Configuration["TokenRangeService:Endpoint"]!); // TODO: Add to bicep
+    });
+
+builder.Services.AddSingleton<ITokenRangeApiClient, TokenRangeApiClient>();
+builder.Services.AddHostedService<TokenManager>();
 
 var app = builder.Build();
 
@@ -33,17 +44,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
-app.MapGet("/", () => $"{nameof(Assembly)} - TEST");
-
+app.MapGet("/", () => "API");
 app.MapPost("/api/urls",
     async (AddUrlHandler handler,
         AddUrlRequest request,
-        ILogger<Program> logger,
-CancellationToken cancellationToken) =>
+        CancellationToken cancellationToken) =>
     {
-        logger.LogInformation("Adding url {Url}", request.LongUrl);
-        
         var requestWithUser = request with
         {
             CreatedBy = "gui@guiferreira.me"
