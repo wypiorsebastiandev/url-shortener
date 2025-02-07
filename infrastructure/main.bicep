@@ -34,9 +34,6 @@ module apiService 'modules/compute/appservice.bicep' = {
       }
     ]
   }
-  dependsOn: [
-    keyVault
-  ]
 }
 
 module tokenRangeService 'modules/compute/appservice.bicep' = {
