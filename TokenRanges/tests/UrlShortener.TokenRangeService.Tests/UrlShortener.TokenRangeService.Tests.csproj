@@ -12,8 +12,9 @@
     <ItemGroup>
         <PackageReference Include="coverlet.collector" Version="6.0.0"/>
         <PackageReference Include="FluentAssertions" Version="6.12.2" />
-        <PackageReference Include="Microsoft.Extensions.TimeProvider.Testing" Version="8.10.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.10" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0"/>
+        <PackageReference Include="Testcontainers.PostgreSql" Version="4.0.0" />
         <PackageReference Include="xunit" Version="2.5.3"/>
         <PackageReference Include="xunit.runner.visualstudio" Version="2.5.3"/>
     </ItemGroup>
@@ -23,7 +24,14 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\UrlShortener.Core\UrlShortener.Core.csproj" />
+      <ProjectReference Include="..\..\src\UrlShortener.TokenRangeService\UrlShortener.TokenRangeService.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="Table.sql" />
+      <Content Include="Table.sql">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </Content>
     </ItemGroup>
 
 </Project>

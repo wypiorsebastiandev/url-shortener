@@ -15,19 +15,19 @@ az login
 ### Create Resource Group
 
 ```bash
-az group create --name swpr-urlshortener-dev --location westeurope
+az group create --name dometrain-urlshortener-dev --location westeurope
 ```
 
 ### Deploy Bicep
 
 ### What if
 ```bash
-az deployment group what-if --resource-group swpr-urlshortener-dev --template-file infrastructure/main.bicep
+az deployment group what-if --resource-group dometrain-urlshortener-dev --template-file infrastructure/main.bicep
 ```
 
 ### Deploy
 ```bash
-az deployment group create --resource-group swpr-urlshortener-dev --template-file infrastructure/main.bicep
+az deployment group create --resource-group dometrain-urlshortener-dev --template-file infrastructure/main.bicep
 ```
 
 ### Create User for GH Actions
@@ -35,11 +35,17 @@ az deployment group create --resource-group swpr-urlshortener-dev --template-fil
 ```bash
 az ad sp create-for-rbac --name "GitHub-Actions-SP" \
                          --role contributor \
-                         --scopes /subscriptions/f9b779f2-ca5b-4326-be30-d1c483b8bd36 \
+                         --scopes /subscriptions/89518450-6f9c-4039-8834-c5bab3ad3e92 \
                          --sdk-auth
 ```
 
+### Apply to Custom Contributor Role
 
+```bash
+az ad sp create-for-rbac --name "GitHub-Actions-SP" --role 'infra_deploy' --scopes /subscriptions/89518450-6f9c-4039-8834-c5bab3ad3e92 --sdk-auth
+```
+
+https://learn.microsoft.com/en-us/azure/role-based-access-control/troubleshooting?tabs=bicep
 
 #### Configure a federated identity credential on an app
 
@@ -48,14 +54,9 @@ https://learn.microsoft.com/en-gb/entra/workload-id/workload-identity-federation
 ## Get Azure Publish Profile
 
 ```bash
-az webapp deployment list-publishing-profiles --name api-kbmgkbf5qxq5m --resource-group swpr-urlshortener-dev --xml
-az webapp deployment list-publishing-profiles --name token-range-service-kbmgkbf5qxq5m --resource-group swpr-urlshortener-dev --xml
-
-
-az webapp deployment list-publishing-profiles --name api-sy6tz5n2hfkwq --resource-group swpr-urlshortener-stg --xml
-az webapp deployment list-publishing-profiles --name token-range-service-sy6tz5n2hfkwq --resource-group swpr-urlshortener-stg --xml
+az webapp deployment list-publishing-profiles --name api-piza2nvlxc5jg --resource-group dometrain-urlshortener-dev --xml
 ```
 
-```bash
-az ad sp create-for-rbac --name "GitHub-Actions-SP" --role 'infra_deploy' --scopes /subscriptions/f9b779f2-ca5b-4326-be30-d1c483b8bd36 --sdk-auth
-```
+# Utilities
+
+- Base62 converter: https://math.tools/calculator/base/10-62

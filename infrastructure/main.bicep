@@ -1,7 +1,8 @@
 param location string = resourceGroup().location
-var uniqueId = uniqueString(resourceGroup().id)
 @secure()
 param pgSqlPassword string
+
+var uniqueId = uniqueString(resourceGroup().id)
 
 module keyVault 'modules/secrets/keyvault.bicep' = {
   name: 'keyVaultDeployment'
@@ -26,6 +27,10 @@ module apiService 'modules/compute/appservice.bicep' = {
       {
         name: 'ContainerName'
         value: 'items'
+      }
+      {
+        name: 'TokenRangeService__Endpoint'
+        value: tokenRangeService.outputs.url
       }
     ]
   }
@@ -70,7 +75,7 @@ module keyVaultRoleAssignment 'modules/secrets/key-vault-role-assignment.bicep' 
     keyVaultName: keyVault.outputs.name
     principalIds: [
       apiService.outputs.principalId
-      // Add more principal IDs as needed
+      tokenRangeService.outputs.principalId
     ]
   }
 }
