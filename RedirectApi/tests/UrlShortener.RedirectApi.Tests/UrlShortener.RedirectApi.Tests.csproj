@@ -24,4 +24,10 @@
         <Using Include="Xunit"/>
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\..\..\Api\tests\UrlShortener.Tests\UrlShortener.Tests.csproj" />
+      <ProjectReference Include="..\..\..\Libraries\UrlShortener.Libraries.Testing\UrlShortener.Libraries.Testing.csproj" />
+      <ProjectReference Include="..\..\src\UrlShortener.RedirectApi\UrlShortener.RedirectApi.csproj" />
+    </ItemGroup>
+
 </Project>

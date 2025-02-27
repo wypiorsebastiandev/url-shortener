@@ -1,8 +1,10 @@
-// namespace UrlShortener.RedirectApi.Tests;
-//
-// [CollectionDefinition("Api collection")]
+using UrlShortener.Tests;
 
-// public class ApiCollection : IClassFixture<ApiFixture>
-// {
-//     
-// }
+namespace UrlShortener.RedirectApi.Tests;
+
+[CollectionDefinition("Api collection")]
+
+public class ApiCollection : IClassFixture<ApiFixture>
+{
+    
+}
