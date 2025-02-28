@@ -125,3 +125,14 @@ module entraApp 'modules/identity/entra-app.bicep' = {
   }
 }
 
+module redisCache 'modules/storage/cache.bicep' = {
+  name: 'redisCacheDeployment'
+  params: {
+    name: 'redis-cache-${uniqueId}'
+    location: location
+    keyVaultName: keyVaultName
+  }
+  // dependsOn: [
+  //   keyVault
+  // ]
+}
