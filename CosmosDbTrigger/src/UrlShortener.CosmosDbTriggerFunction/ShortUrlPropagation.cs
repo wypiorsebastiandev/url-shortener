@@ -62,7 +62,7 @@ public class ShortUrlPropagation
     {
         public string LongUrl { get; }
 
-        [JsonProperty(PropertyName = "id")] // Cosmos DB Unique Identifier
+        [JsonProperty(PropertyName = "id")] // Cosmos DB Unique Identifier.
         public string ShortUrl { get; }
 
         public DateTimeOffset CreatedOn { get; }
