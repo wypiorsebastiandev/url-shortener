@@ -151,6 +151,7 @@ module keyVaultRoleAssignment 'modules/secrets/key-vault-role-assignment.bicep' 
       apiService.outputs.principalId
       tokenRangeService.outputs.principalId
       redirectApiService.outputs.principalId
+      cosmosTriggerFunction.outputs.principalId
     ]
   }
 }
