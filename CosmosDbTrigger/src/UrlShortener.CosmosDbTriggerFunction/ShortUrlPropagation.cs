@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using Microsoft.Azure.Cosmos;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace UrlShortener.CosmosDbTriggerFunction;
 
@@ -60,7 +62,7 @@ public class ShortUrlPropagation
     {
         public string LongUrl { get; }
 
-        [JsonProperty(PropertyName = "id")] // Cosmos DB Unique Identifier
+        [JsonProperty(PropertyName = "id")] // Cosmos DB Unique Identifier.
         public string ShortUrl { get; }
 
         public DateTimeOffset CreatedOn { get; }
